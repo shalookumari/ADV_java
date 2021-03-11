@@ -19,21 +19,7 @@ private int player_id;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Player(int player_id, String name, Date dateOfBirth, int age, String email, String country, String skills,
-			int match, int runs, int wickets, int team_id) {
-		super();
-		this.player_id = player_id;
-		this.name = name;
-		this.dateOfBirth = dateOfBirth;
-		this.age = age;
-		this.email = email;
-		this.country = country;
-		this.skills = skills;
-		this.match = match;
-		this.runs = runs;
-		this.wickets = wickets;
-		this.team_id = team_id;
-	}
+
 	public int getPlayer_id() {
 		return player_id;
 	}
@@ -105,6 +91,22 @@ private int player_id;
 		return "Player [player_id=" + player_id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", age=" + age
 				+ ", email=" + email + ", country=" + country + ", skills=" + skills + ", match=" + match + ", runs="
 				+ runs + ", wickets=" + wickets + ", team_id=" + team_id + "]";
+	}
+
+	public Player(int player_id, String name, Date dateOfBirth, int age, String email, String country, String skills,
+			int match, int runs, int wickets, int team_id) {
+		super();
+		this.player_id = player_id;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.age = age;
+		this.email = email;
+		this.country = country;
+		this.skills = skills;
+		this.match = match;
+		this.runs = runs;
+		this.wickets = wickets;
+		this.team_id = team_id;
 	}
 	
 	
