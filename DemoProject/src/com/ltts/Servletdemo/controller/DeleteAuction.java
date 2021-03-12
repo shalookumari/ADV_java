@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ltts.Servlet.dao.Auctiondao;
-import com.ltts.Servlet.dao.Teamdao;
 import com.ltts.Servlet.model.Auction;
-import com.ltts.Servlet.model.Team;
 
 /**
- * Servlet implementation class InsertAuctionServlet1
+ * Servlet implementation class DeleteAuctionServlet
  */
-@WebServlet("/InsertAuctionServlet")
-public class InsertAuction extends HttpServlet {
+@WebServlet("/DeleteAuction")
+public class DeleteAuction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertAuction() {
+    public DeleteAuction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,29 +42,26 @@ public class InsertAuction extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		PrintWriter out = response.getWriter();
-		
-		int ano=Integer.parseInt(request.getParameter("aid"));
-		String pname=request.getParameter("pname");
-		int price=Integer.parseInt(request.getParameter("price"));
-		
-		Auction a = new Auction(ano, price, price, pname, price);
-		System.out.println("Inside Servlet: " +a);
+		int id = Integer.parseInt(request.getParameter("pno"));	
+		Auction p=new Auction(id, 0, 0, null, 0);
+		System.out.println("Inside Servlet: "+p);
 		Auctiondao pd=new Auctiondao();
-		boolean b=false;
-		
+		boolean b=false;		
 		RequestDispatcher rd=null;
 		try {
-			b=pd.insertAuction(a, null, null); // Control TRanfers to Dao file
-			rd=request.getRequestDispatcher("success.html");
+			b=pd.deleteAuction(p); // Control TRanfers to Dao file
+			rd=request.getRequestDispatcher("Success2.html");
 			rd.forward(request, response);
-			//System.out.println("Successfully Inserted...");
+			System.out.println("Aution deets deleted succesfully!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			out.write("Already Player id Used: "+e);
-			rd=request.getRequestDispatcher("auction.html");
+			rd=request.getRequestDispatcher("addplayer.html");
 			rd.include(request, response);
 			e.printStackTrace();
+			
 		}
+		
 	}
 
 }

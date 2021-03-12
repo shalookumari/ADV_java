@@ -6,7 +6,7 @@ public class Team {
 	private String ownerName;
 	private String coachName;
 	
-	public Team() {
+	public Team(int i, String string, String string2, String string3, int j) {
 		super();
 	}
 	
@@ -57,6 +57,24 @@ public class Team {
 	public String toString() {
 		return "Team [teamId=" + teamId + ", teamName=" + teamName + ", ownerName=" + ownerName + ", coachName="
 				+ coachName + "]";
+	}
+
+
+	public Object getCoach() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void setCoach(Object coach) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public int getCaptainId() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

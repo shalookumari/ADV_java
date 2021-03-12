@@ -1,4 +1,5 @@
 package com.ltts.Servletdemo.controller;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -9,22 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ltts.Servlet.dao.Auctiondao;
 import com.ltts.Servlet.dao.Teamdao;
-import com.ltts.Servlet.model.Auction;
 import com.ltts.Servlet.model.Team;
 
 /**
- * Servlet implementation class InsertAuctionServlet1
+ * Servlet implementation class DeleteTeamServlet
  */
-@WebServlet("/InsertAuctionServlet")
-public class InsertAuction extends HttpServlet {
+@WebServlet("/DeleteTeam")
+public class DeleteTeam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertAuction() {
+    public DeleteTeam() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,31 +42,28 @@ public class InsertAuction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		PrintWriter out = response.getWriter();
-		
-		int ano=Integer.parseInt(request.getParameter("aid"));
-		String pname=request.getParameter("pname");
-		int price=Integer.parseInt(request.getParameter("price"));
-		
-		Auction a = new Auction(ano, price, price, pname, price);
-		System.out.println("Inside Servlet: " +a);
-		Auctiondao pd=new Auctiondao();
-		boolean b=false;
-		
+		PrintWriter out = response.getWriter();		
+		String id = request.getParameter("pno");		
+		Team p=new Team(0, id, null, null);
+		System.out.println("Inside Servlet: "+p);
+		Teamdao pd=new Teamdao();
+		boolean b=false;		
 		RequestDispatcher rd=null;
 		try {
-			b=pd.insertAuction(a, null, null); // Control TRanfers to Dao file
-			rd=request.getRequestDispatcher("success.html");
+			b=pd.deleteTeam(p); // Control TRanfers to Dao file
+			rd=request.getRequestDispatcher("Success1.html");
 			rd.forward(request, response);
-			//System.out.println("Successfully Inserted...");
+			System.out.println("Team deets deleted succesfully!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			out.write("Already Player id Used: "+e);
-			rd=request.getRequestDispatcher("auction.html");
+			rd=request.getRequestDispatcher("team.html");
 			rd.include(request, response);
 			e.printStackTrace();
+			
 		}
+		
 	}
 
-}
 
+}

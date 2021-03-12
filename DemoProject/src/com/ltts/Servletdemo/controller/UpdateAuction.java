@@ -1,4 +1,5 @@
 package com.ltts.Servletdemo.controller;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,21 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ltts.Servlet.dao.Auctiondao;
-import com.ltts.Servlet.dao.Teamdao;
 import com.ltts.Servlet.model.Auction;
-import com.ltts.Servlet.model.Team;
+
 
 /**
- * Servlet implementation class InsertAuctionServlet1
+ * Servlet implementation class UpdateAuctionServlet
  */
-@WebServlet("/InsertAuctionServlet")
-public class InsertAuction extends HttpServlet {
+@WebServlet("/UpdateAution")
+public class UpdateAuction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertAuction() {
+    public UpdateAuction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,23 +43,21 @@ public class InsertAuction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		PrintWriter out = response.getWriter();
-		
-		int ano=Integer.parseInt(request.getParameter("aid"));
-		String pname=request.getParameter("pname");
-		int price=Integer.parseInt(request.getParameter("price"));
-		
-		Auction a = new Auction(ano, price, price, pname, price);
-		System.out.println("Inside Servlet: " +a);
+		PrintWriter out = response.getWriter();		
+		int id=Integer.parseInt(request.getParameter("aid"));	
+		//int ayear = Integer.parseInt(request.getParameter("ayear"));
+		double aprice = Double.parseDouble(request.getParameter("aprice"));		
+		// Player p1 = new Player();
+		Auction a = new Auction(id,0,0,null,aprice);
+		System.out.println("Inside Servlet: "+a);
 		Auctiondao pd=new Auctiondao();
-		boolean b=false;
-		
+		boolean b=false;		
 		RequestDispatcher rd=null;
 		try {
-			b=pd.insertAuction(a, null, null); // Control TRanfers to Dao file
-			rd=request.getRequestDispatcher("success.html");
+			b= pd.updateAuction(a);
+			rd=request.getRequestDispatcher("Success2.html");
 			rd.forward(request, response);
-			//System.out.println("Successfully Inserted...");
+			System.out.println("Hurray! Updated!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			out.write("Already Player id Used: "+e);
@@ -67,7 +65,9 @@ public class InsertAuction extends HttpServlet {
 			rd.include(request, response);
 			e.printStackTrace();
 		}
+		
 	}
 
+	
 }
 

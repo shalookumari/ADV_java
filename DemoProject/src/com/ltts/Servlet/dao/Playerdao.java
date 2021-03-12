@@ -60,6 +60,14 @@ public class Playerdao {
 
 		return p;
 	}
+	public boolean deletePlayer(Player p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean updatePlayer(Player p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 
 }

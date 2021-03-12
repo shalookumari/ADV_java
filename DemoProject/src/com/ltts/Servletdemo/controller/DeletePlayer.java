@@ -1,4 +1,6 @@
 package com.ltts.Servletdemo.controller;
+
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -9,22 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ltts.Servlet.dao.Auctiondao;
-import com.ltts.Servlet.dao.Teamdao;
-import com.ltts.Servlet.model.Auction;
-import com.ltts.Servlet.model.Team;
+import com.ltts.Servlet.dao.Playerdao;
+import com.ltts.Servlet.model.Player;
 
 /**
- * Servlet implementation class InsertAuctionServlet1
+ * Servlet implementation class DeletePlayerServlet
  */
-@WebServlet("/InsertAuctionServlet")
-public class InsertAuction extends HttpServlet {
+@WebServlet("/DeletePlayer")
+public class DeletePlayer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertAuction() {
+    public DeletePlayer() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,31 +43,28 @@ public class InsertAuction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		PrintWriter out = response.getWriter();
-		
-		int ano=Integer.parseInt(request.getParameter("aid"));
-		String pname=request.getParameter("pname");
-		int price=Integer.parseInt(request.getParameter("price"));
-		
-		Auction a = new Auction(ano, price, price, pname, price);
-		System.out.println("Inside Servlet: " +a);
-		Auctiondao pd=new Auctiondao();
-		boolean b=false;
-		
+		PrintWriter out = response.getWriter();		
+		String id = request.getParameter("pno");		
+		Player p=new Player(0, id, null, 0, id, id, id, 0, 0, 0, 0);
+		System.out.println("Inside Servlet: "+p);
+		Playerdao pd=new Playerdao();
+		boolean b=false;		
 		RequestDispatcher rd=null;
 		try {
-			b=pd.insertAuction(a, null, null); // Control TRanfers to Dao file
-			rd=request.getRequestDispatcher("success.html");
+			b=pd.deletePlayer(p);
+			rd=request.getRequestDispatcher("Success.html");
 			rd.forward(request, response);
-			//System.out.println("Successfully Inserted...");
+			System.out.println("Player deets deleted succesfully!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			out.write("Already Player id Used: "+e);
-			rd=request.getRequestDispatcher("auction.html");
+			rd=request.getRequestDispatcher("addplayer.html");
 			rd.include(request, response);
 			e.printStackTrace();
+			
 		}
+		
 	}
 
-}
 
+}
